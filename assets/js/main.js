@@ -1,5 +1,5 @@
 /**
-* Template Name: Delicious
+* Template Name: Ăn vặt MOMER
 * Template URL: https://bootstrapmade.com/delicious-free-restaurant-bootstrap-theme/
 * Updated: Aug 07 2024 with Bootstrap v5.3.3
 * Author: BootstrapMade.com
