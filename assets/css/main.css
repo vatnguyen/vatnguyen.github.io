@@ -238,9 +238,14 @@ h6 {
   transition: all 0.5s;
 }
 
+/* .header .topbar .contact-info i {
+  font-style: normal;
+  color: var(--accent-color);
+} */
 .header .topbar .contact-info i {
   font-style: normal;
   color: var(--accent-color);
+  margin-right: 10px;
 }
 
 .header .topbar .contact-info i a,
