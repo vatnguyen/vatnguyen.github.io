@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sửa xe lưu động Đà Nẵng 24/7 - Có mặt sau 15 phút. Dịch vụ sửa chữa xe máy tận nơi, chuyên nghiệp, uy tín tại Hải Châu, Thanh Khê, Liên Chiểu">
+    <meta name="description" content="Sửa xe lưu động Đà Nẵng 24/7 Thông Nguyễn - Có mặt sau 15 phút. Dịch vụ sửa chữa xe máy tận nơi, chuyên nghiệp, uy tín tại Hải Châu, Thanh Khê, Liên Chiểu">
     <title>Thông Nguyễn - Sửa Xe Lưu Động Đà Nẵng 24/7</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
@@ -601,6 +601,21 @@
     </style>
 </head>
 <body>
+
+     <!-- Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+    <div class="sidebar" id="sidebar">
+        <button class="sidebar-close" onclick="toggleSidebar()">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="sidebar-menu">
+            <li><a href="#home" onclick="toggleSidebar()"><i class="fas fa-home"></i> Trang chủ</a></li>
+            <li><a href="#services" onclick="toggleSidebar()"><i class="fas fa-wrench"></i> Dịch vụ</a></li>
+            <li><a href="#reviews" onclick="toggleSidebar()"><i class="fas fa-star"></i> Đánh giá khách hàng</a></li>
+            <li><a href="#booking" onclick="toggleSidebar()"><i class="fas fa-calendar-check"></i> Đặt lịch</a></li>
+        </ul>
+    </div>
+    
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -612,7 +627,7 @@
                 </div>
                 <div class="col-6 text-end">
                     <div class="d-flex align-items-center justify-content-end gap-2">
-                        <button class="btn-call d-none d-sm-block" onclick="window.location.href='tel:0905123456'">
+                        <button class="btn-call d-none d-sm-block" onclick="window.location.href='tel:0898190266'">
                             <i class="fas fa-phone-alt"></i> Gọi ngay 24/7
                         </button>
                         <button class="menu-toggle" onclick="toggleSidebar()">
@@ -624,27 +639,13 @@
         </div>
     </header>
 
-    <!-- Sidebar -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-    <div class="sidebar" id="sidebar">
-        <button class="sidebar-close" onclick="toggleSidebar()">
-            <i class="fas fa-times"></i>
-        </button>
-        <ul class="sidebar-menu">
-            <li><a href="" onclick="toggleSidebar()"><i class="fas fa-home"></i> Trang chủ</a></li>
-            <li><a href="#services" onclick="toggleSidebar()"><i class="fas fa-wrench"></i> Dịch vụ</a></li>
-            <li><a href="#reviews" onclick="toggleSidebar()"><i class="fas fa-star"></i> Đánh giá khách hàng</a></li>
-            <li><a href="#booking" onclick="toggleSidebar()"><i class="fas fa-calendar-check"></i> Đặt lịch</a></li>
-        </ul>
-    </div>
-
-    <!-- Hero Section -->
+   <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
             <h1>Sửa Xe Lưu Động Đà Nẵng – Có mặt sau 15 phút, 24/7</h1>
             <p>Dịch vụ sửa chữa xe máy tận nơi, chuyên nghiệp và uy tín</p>
             <div class="cta-buttons justify-content-center mt-4">
-                <button class="btn-call" onclick="window.location.href='tel:0905123456'">
+                <button class="btn-call" onclick="window.location.href='tel:0898190266'">
                     <i class="fas fa-phone-alt"></i> Gọi ngay 24/7
                 </button>
                 <button class="btn-book" onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})">
@@ -660,7 +661,7 @@
             <h2 class="section-title">Kết nối với chúng tôi</h2>
             <div class="row">
                 <div class="col-md-6">
-                    <a href="https://facebook.com/thongnguyen.suaxe" target="_blank" class="social-card">
+                    <a href="https://www.facebook.com/suaxeluudongdanang247tainha" target="_blank" class="social-card">
                         <div class="social-card-header">
                             <div class="social-icon facebook-icon">
                                 <i class="fab fa-facebook-f"></i>
@@ -674,14 +675,14 @@
                     </a>
                 </div>
                 <div class="col-md-6">
-                    <a href="https://tiktok.com/@thongnguyen.suaxe" target="_blank" class="social-card">
+                    <a href="https://tiktok.com/@suaxeluudongdanang247" target="_blank" class="social-card">
                         <div class="social-card-header">
                             <div class="social-icon tiktok-icon">
                                 <i class="fab fa-tiktok"></i>
                             </div>
                             <div>
                                 <h3>TikTok Channel</h3>
-                                <p>@thongnguyen.suaxe</p>
+                                <p>@suaxeluudongdanang247</p>
                             </div>
                         </div>
                         <p>Xem các video hướng dẫn sửa chữa và bảo dưỡng xe máy đơn giản tại nhà!</p>
@@ -708,7 +709,7 @@
                             <div class="service-content">
                                 <h4>Sửa chữa tận nơi 24/7</h4>
                                 <p>Xe hư giữa đường? Gọi ngay! Chúng tôi có mặt trong 15 phút với đầy đủ dụng cụ và phụ tùng chính hãng.</p>
-                                <button class="btn-view" onclick="window.open('https://facebook.com/thongnguyen.suaxe', '_blank')">
+                                <button class="btn-view" onclick="window.open('https://www.facebook.com/suaxeluudongdanang247tainha', '_blank')">
                                     <i class="fab fa-facebook"></i> Xem trên Facebook
                                 </button>
                             </div>
@@ -722,7 +723,7 @@
                             <div class="service-content">
                                 <h4>Thay nhớt - Bảo dưỡng định kỳ</h4>
                                 <p>Dịch vụ thay nhớt và bảo dưỡng tổng thể tại nhà, giúp xe luôn hoạt động êm ái và bền bỉ.</p>
-                                <button class="btn-view" onclick="window.open('https://facebook.com/thongnguyen.suaxe', '_blank')">
+                                <button class="btn-view" onclick="window.open('https://www.facebook.com/suaxeluudongdanang247tainha', '_blank')">
                                     <i class="fab fa-facebook"></i> Xem trên Facebook
                                 </button>
                             </div>
@@ -736,7 +737,7 @@
                             <div class="service-content">
                                 <h4>Cứu hộ xe hết bình</h4>
                                 <p>Xe không nổ máy? Dịch vụ cứu hộ nhanh chóng, thay bình ắc quy mới ngay tại chỗ.</p>
-                                <button class="btn-view" onclick="window.open('https://facebook.com/thongnguyen.suaxe', '_blank')">
+                                <button class="btn-view" onclick="window.open('https://www.facebook.com/suaxeluudongdanang247tainha', '_blank')">
                                     <i class="fab fa-facebook"></i> Xem trên Facebook
                                 </button>
                             </div>
@@ -753,7 +754,7 @@
                             <div class="service-content">
                                 <h4>Hướng dẫn xử lý xe hư cơ bản</h4>
                                 <p>Video ngắn hướng dẫn cách xử lý các sự cố xe máy thường gặp khi đang lưu thông.</p>
-                                <button class="btn-view" onclick="window.open('https://tiktok.com/@thongnguyen.suaxe', '_blank')">
+                                <button class="btn-view" onclick="window.open('https://tiktok.com/@suaxeluudongdanang247', '_blank')">
                                     <i class="fab fa-tiktok"></i> Xem trên TikTok
                                 </button>
                             </div>
@@ -770,7 +771,7 @@
                             <div class="service-content">
                                 <h4>Tips bảo dưỡng xe mùa mưa</h4>
                                 <p>Chia sẻ những mẹo hay giúp xe máy luôn khỏe mạnh trong mùa mưa bão Đà Nẵng.</p>
-                                <button class="btn-view" onclick="window.open('https://tiktok.com/@thongnguyen.suaxe', '_blank')">
+                                <button class="btn-view" onclick="window.open('https://tiktok.com/@suaxeluudongdanang247', '_blank')">
                                     <i class="fab fa-tiktok"></i> Xem trên TikTok
                                 </button>
                             </div>
@@ -869,7 +870,7 @@
             </div>
         </div>
 
-        <button class="btn-all-reviews" onclick="window.open('https://facebook.com/thongnguyen.suaxe', '_blank')">
+        <button class="btn-all-reviews" onclick="window.open('https://www.facebook.com/suaxeluudongdanang247tainha', '_blank')">
             <i class="fab fa-facebook"></i> Xem tất cả đánh giá
         </button>
     </section>
@@ -931,11 +932,11 @@
             <h4>Thông Nguyễn – Sửa Xe Lưu Động Đà Nẵng 24/7</h4>
             <div class="footer-info">
                 <i class="fas fa-phone-alt"></i>
-                <a href="tel:0905123456">Hotline: 0905 123 456</a>
+                <a href="tel:0898190266">Hotline: 0898 190 266</a>
             </div>
             <div class="footer-info">
                 <i class="fas fa-comment-dots"></i>
-                <a href="https://zalo.me/0905123456" target="_blank">Zalo: 0905 123 456</a>
+                <a href="https://zalo.me/0338996274" target="_blank">Zalo: 0338 996 274</a>
             </div>
             <div class="footer-info">
                 <i class="fas fa-envelope"></i>
@@ -946,13 +947,13 @@
                 <span>Khu vực phục vụ: Hải Châu, Thanh Khê, Liên Chiểu, Sơn Trà, Ngũ Hành Sơn, Cẩm Lệ</span>
             </div>
             <div class="social-icons">
-                <a href="https://facebook.com/thongnguyen.suaxe" target="_blank">
+                <a href="https://www.facebook.com/suaxeluudongdanang247tainha" target="_blank">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://tiktok.com/@thongnguyen.suaxe" target="_blank">
+                <a href="https://tiktok.com/@suaxeluudongdanang247" target="_blank">
                     <i class="fab fa-tiktok"></i>
                 </a>
-                <a href="https://zalo.me/0905123456" target="_blank">
+                <a href="https://zalo.me/0338996274" target="_blank">
                     <i class="fas fa-comment-dots"></i>
                 </a>
             </div>
@@ -964,10 +965,10 @@
 
     <!-- Floating Action Buttons -->
     <div class="fab-container">
-        <button class="fab-button fab-zalo" onclick="window.open('https://zalo.me/0905123456', '_blank')" title="Chat Zalo">
+        <button class="fab-button fab-zalo" onclick="window.open('https://zalo.me/0338996274', '_blank')" title="Chat Zalo">
             <i class="fas fa-comment-dots"></i>
         </button>
-        <button class="fab-button fab-call" onclick="window.location.href='tel:0905123456'" title="Gọi ngay">
+        <button class="fab-button fab-call" onclick="window.location.href='tel:0898190266'" title="Gọi ngay">
             <i class="fas fa-phone-alt"></i>
         </button>
     </div>
