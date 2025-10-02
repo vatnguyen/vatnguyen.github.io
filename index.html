@@ -149,21 +149,74 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #0d6efd, #0a58ca);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
+            padding: 0;
         }
-        
-        .hero h1 {
+
+        .hero-slide {
+            min-height: 440px;
+            background-size: contain;  /* Thay 'cover' thành 'contain' */
+            background-position: center;
+            background-repeat: no-repeat;  /* Thêm dòng này */
+            position: relative;
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;  /* Thêm màu nền phụ */
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.8), rgba(10, 88, 202, 0.8));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .hero-content h1 {
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 15px;
         }
-        
-        .hero p {
+
+        .hero-content p {
             font-size: 16px;
             margin-bottom: 0;
+        }
+
+        .carousel-indicators {
+            bottom: 20px;
+            
+        }
+        .carousel-indicators [data-bs-target] {
+            background-color: #090909;
+        }
+
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        @media (min-width: 768px) {
+            .hero-slide {
+                min-height: 600px;
+            }
+            
+            .hero-content h1 {
+                font-size: 32px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
         }
         
         /* Social Media Cards */
@@ -647,18 +700,40 @@
         </div>
     </header>
 
-   <!-- Hero Section -->
+    <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="container">
-            <h1>Sửa Xe Lưu Động Đà Nẵng  Thông Nguyễn – Có mặt sau 15 phút, 24/7</h1>
-            <p>Dịch vụ sửa chữa xe máy tận nơi, chuyên nghiệp và uy tín</p>
-            <div class="cta-buttons justify-content-center mt-4">
-                <button class="btn-call" onclick="window.location.href='tel:0898190266'">
-                    <i class="fas fa-phone-alt"></i> Gọi ngay 24/7
-                </button>
-                <button class="btn-book" onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})">
-                    <i class="fas fa-calendar-check"></i> Đặt lịch sửa xe
-                </button>
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            </div>
+
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="hero-slide" style="background-image: url('hero-bg-1.jpg');">
+                        <div class="hero-overlay"></div>
+                        <div class="container hero-content">
+                            <h1>Sửa Xe Lưu Động Đà Nẵng Thông Nguyễn – Có mặt sau 15 phút, 24/7</h1>
+                            <p>Dịch vụ sửa chữa xe máy tận nơi, chuyên nghiệp và uy tín</p>
+                            <div class="cta-buttons justify-content-center mt-4">
+                                <button class="btn-call" onclick="window.location.href='tel:0898190266'">
+                                    <i class="fas fa-phone-alt"></i> Gọi ngay 24/7
+                                </button>
+                                <button class="btn-book" onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})">
+                                    <i class="fas fa-calendar-check"></i> Đặt lịch sửa xe
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="hero-slide" style="background-image: url('HinhNenSuaXe.png');">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
