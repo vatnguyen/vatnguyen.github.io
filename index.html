@@ -680,6 +680,29 @@
     </script>
 
 
+    <!-- Event snippet for Người liên hệ conversion page
+    In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+    <!-- Script của Google Ads -->
+    <script>
+        function gtag_report_conversion(url, newTab = false) {
+        var callback = function () {
+            if (typeof(url) != 'undefined') {
+            if (newTab) {
+                window.open(url, '_blank');
+            } else {
+                window.location.href = url;
+            }
+            }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-17277567646/7ef3CP3ypKAbEJ6Fy65A',
+            'event_callback': callback
+        });
+        return false;
+        }
+    </script>
+
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17277567646">
     </script>
@@ -723,9 +746,10 @@
                 </div>
                 <div class="col-6 text-end">
                     <div class="d-flex align-items-center justify-content-end gap-2">
-                        <button class="btn-call d-sm-block" onclick="window.location.href='tel:0898190266'">
+                        <button class="btn-call d-sm-block" onclick="return gtag_report_conversion('tel:0898190266')">
                             <i class="fas fa-phone-alt"></i> Gọi ngay 24/7
                         </button>
+                        
                         <button class="menu-toggle" onclick="toggleSidebar()">
                             <i class="fas fa-bars"></i>
                         </button>
@@ -753,7 +777,7 @@
                             <h1>Sửa Xe Lưu Động Đà Nẵng Thông Nguyễn – Có mặt sau 15 phút, 24/7</h1>
                             <p>Dịch vụ sửa chữa xe máy tận nơi, chuyên nghiệp và uy tín</p>
                             <div class="cta-buttons justify-content-center mt-4">
-                                <button class="btn-call" onclick="window.location.href='tel:0898190266'">
+                                <button class="btn-call" onclick="return gtag_report_conversion('tel:0898190266')">
                                     <i class="fas fa-phone-alt"></i> Gọi ngay 24/7
                                 </button>
                                 <button class="btn-book" onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})">
@@ -1083,13 +1107,13 @@
 
     <!-- Floating Action Buttons -->
     <div class="fab-container">
-        <button class="fab-button fab-zalo" onclick="window.open('https://zalo.me/0338996274', '_blank')" title="Chat Zalo">
+        <button class="fab-button fab-zalo" onclick="return gtag_report_conversion('https://zalo.me/0338996274', true)" title="Chat Zalo">
             <img src="logo_zalo.svg" alt="Zalo" style="width: 32px; height: 32px; object-fit: contain;">
         </button>
-        <button class="fab-button fab-messenger" onclick="window.open('https://m.me/100090629284205', '_blank')" title="Chat Messenger">
+        <button class="fab-button fab-messenger" onclick="return gtag_report_conversion('https://m.me/100090629284205', true)" title="Chat Messenger">
             <i class="fab fa-facebook-messenger"></i>
         </button>
-        <button class="fab-button fab-call" onclick="window.location.href='tel:0898190266'" title="Gọi ngay">
+        <button class="fab-button fab-call" onclick="return gtag_report_conversion('tel:0898190266')" title="Gọi ngay">
             <i class="fas fa-phone-alt"></i>
         </button>
     </div>
