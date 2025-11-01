@@ -1102,10 +1102,7 @@
         <div class="container">
             <h2 class="section-title">Đặt lịch sửa xe</h2>
             <form class="booking-form" onsubmit="submitBooking(event)">
-                <div class="mb-3">
-                    <label class="form-label">Họ và tên <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" placeholder="Nhập họ tên của bạn" required>
-                </div>
+                
                 <div class="mb-3">
                     <label class="form-label">Số điện thoại <span class="text-danger">*</span></label>
                     <input type="tel" class="form-control" placeholder="Nhập số điện thoại" required>
@@ -1113,19 +1110,6 @@
                 <div class="mb-3">
                     <label class="form-label">Địa điểm <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" placeholder="Nhập địa chỉ cụ thể" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Quận/Huyện <span class="text-danger">*</span></label>
-                    <select class="form-select" required>
-                        <option value="">Chọn quận/huyện</option>
-                        <option value="haichau">Hải Châu</option>
-                        <option value="thanhkhe">Thanh Khê</option>
-                        <option value="lienChieu">Liên Chiểu</option>
-                        <option value="sontra">Sơn Trà</option>
-                        <option value="ngu-hanh-son">Ngũ Hành Sơn</option>
-                        <option value="camle">Cẩm Lệ</option>
-                        <option value="hoacang">Hòa Vang</option>
-                    </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ghi chú</label>
@@ -1484,7 +1468,7 @@
                 });
             });
 
-            console.log('🛡️ Anti-fraud protection activated');
+            // console.log('🛡️ Anti-fraud protection activated');
         });
 
         // Honeypot: Tạo button ẩn để bắt bot
