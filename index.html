@@ -1241,5 +1241,310 @@
             });
         });
     </script>
+
+
+    <!-- HƯỚNG DẪN: Copy toàn bộ script này và paste vào TRƯỚC thẻ </body> trong landing page -->
+
+    <script>
+    // ============================================
+    // CHỐNG CLICK ẢO - ANTI-FRAUD PROTECTION
+    // ============================================
+
+    (function() {
+        'use strict';
+        
+        // Config
+        const CONFIG = {
+            MAX_CLICKS_PER_IP: 3,           // Tối đa 3 click/IP/ngày
+            MAX_CLICKS_PER_SESSION: 5,       // Tối đa 5 click/session
+            MIN_TIME_ON_PAGE: 3000,          // Phải ở trang ít nhất 3 giây
+            STORAGE_KEY: 'antifraud_data',
+            BLOCKED_KEY: 'blocked_until',
+            SESSION_KEY: 'session_id'
+        };
+
+        // Tạo session ID unique
+        function getSessionId() {
+            let sessionId = sessionStorage.getItem(CONFIG.SESSION_KEY);
+            if (!sessionId) {
+                sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                sessionStorage.setItem(CONFIG.SESSION_KEY), sessionId;
+            }
+            return sessionId;
+        }
+
+        // Lấy fingerprint của device
+        function getDeviceFingerprint() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.textBaseline = 'top';
+            ctx.font = '14px Arial';
+            ctx.fillText('fingerprint', 2, 2);
+            
+            return {
+                userAgent: navigator.userAgent,
+                language: navigator.language,
+                platform: navigator.platform,
+                screenResolution: `${screen.width}x${screen.height}`,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                canvasHash: canvas.toDataURL().slice(-50)
+            };
+        }
+
+        // Tạo hash từ fingerprint
+        function hashFingerprint(fp) {
+            const str = JSON.stringify(fp);
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return 'fp_' + Math.abs(hash).toString(36);
+        }
+
+        // Lưu data vào localStorage
+        function saveData(data) {
+            try {
+                localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(data));
+            } catch (e) {
+                console.warn('Storage error:', e);
+            }
+        }
+
+        // Đọc data từ localStorage
+        function loadData() {
+            try {
+                const data = localStorage.getItem(CONFIG.STORAGE_KEY);
+                return data ? JSON.parse(data) : { clicks: [], lastReset: Date.now() };
+            } catch (e) {
+                return { clicks: [], lastReset: Date.now() };
+            }
+        }
+
+        // Kiểm tra có bị block không
+        function isBlocked() {
+            const blockedUntil = localStorage.getItem(CONFIG.BLOCKED_KEY);
+            if (blockedUntil && Date.now() < parseInt(blockedUntil)) {
+                return true;
+            }
+            return false;
+        }
+
+        // Block user
+        function blockUser(hours = 24) {
+            const blockedUntil = Date.now() + (hours * 60 * 60 * 1000);
+            localStorage.setItem(CONFIG.BLOCKED_KEY, blockedUntil);
+            
+            // Hiện cảnh báo
+            alert('⚠️ Hệ thống phát hiện hoạt động bất thường. Vui lòng thử lại sau ' + hours + ' giờ.');
+            
+            // Gửi log về server (nếu có)
+            trackSuspiciousActivity('user_blocked', { hours: hours });
+        }
+
+        // Track hành vi đáng ngờ
+        function trackSuspiciousActivity(type, details = {}) {
+            const data = {
+                type: type,
+                fingerprint: hashFingerprint(getDeviceFingerprint()),
+                sessionId: getSessionId(),
+                timestamp: new Date().toISOString(),
+                url: window.location.href,
+                userAgent: navigator.userAgent,
+                ...details
+            };
+            
+            console.warn('🚨 Suspicious activity:', data);
+            
+            // TODO: Gửi về server của anh để phân tích
+            // fetch('/api/log-suspicious', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(data)
+            // });
+        }
+
+        // Kiểm tra click có hợp lệ không
+        function validateClick() {
+            // Kiểm tra đã bị block chưa
+            if (isBlocked()) {
+                trackSuspiciousActivity('click_while_blocked');
+                return false;
+            }
+
+            // Kiểm tra thời gian ở trang
+            const timeOnPage = Date.now() - window.pageLoadTime;
+            if (timeOnPage < CONFIG.MIN_TIME_ON_PAGE) {
+                trackSuspiciousActivity('click_too_fast', { timeOnPage: timeOnPage });
+                blockUser(1); // Block 1 giờ
+                return false;
+            }
+
+            // Load data
+            let data = loadData();
+            
+            // Reset data nếu qua ngày mới
+            if (Date.now() - data.lastReset > 24 * 60 * 60 * 1000) {
+                data = { clicks: [], lastReset: Date.now() };
+            }
+
+            // Lấy fingerprint
+            const fingerprint = hashFingerprint(getDeviceFingerprint());
+            const sessionId = getSessionId();
+
+            // Đếm số click theo fingerprint
+            const fpClicks = data.clicks.filter(c => c.fingerprint === fingerprint).length;
+            if (fpClicks >= CONFIG.MAX_CLICKS_PER_IP) {
+                trackSuspiciousActivity('max_clicks_per_device', { clicks: fpClicks });
+                blockUser(24);
+                return false;
+            }
+
+            // Đếm số click theo session
+            const sessionClicks = data.clicks.filter(c => c.sessionId === sessionId).length;
+            if (sessionClicks >= CONFIG.MAX_CLICKS_PER_SESSION) {
+                trackSuspiciousActivity('max_clicks_per_session', { clicks: sessionClicks });
+                blockUser(2);
+                return false;
+            }
+
+            // Lưu click mới
+            data.clicks.push({
+                fingerprint: fingerprint,
+                sessionId: sessionId,
+                timestamp: Date.now()
+            });
+            saveData(data);
+
+            return true;
+        }
+
+        // Track thời gian vào trang
+        window.pageLoadTime = Date.now();
+
+        // Track mouse movement (bot thường không move chuột)
+        let mouseMovements = 0;
+        let lastMouseMove = 0;
+        document.addEventListener('mousemove', function() {
+            const now = Date.now();
+            if (now - lastMouseMove > 100) { // Chỉ count nếu cách nhau >100ms
+                mouseMovements++;
+                lastMouseMove = now;
+            }
+        });
+
+        // Track scroll behavior
+        let scrollCount = 0;
+        window.addEventListener('scroll', function() {
+            scrollCount++;
+        });
+
+        // Bảo vệ tất cả link và button quan trọng
+        function protectElement(element) {
+            element.addEventListener('click', function(e) {
+                // Kiểm tra có mouse movement không
+                if (mouseMovements < 5 && scrollCount < 2) {
+                    trackSuspiciousActivity('no_human_behavior', {
+                        mouseMovements: mouseMovements,
+                        scrollCount: scrollCount
+                    });
+                    e.preventDefault();
+                    blockUser(1);
+                    return false;
+                }
+
+                // Validate click
+                if (!validateClick()) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Click hợp lệ - track conversion
+                console.log('✅ Valid click tracked');
+            });
+        }
+
+        // Tự động bảo vệ các element quan trọng khi DOM loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Bảo vệ tất cả button call, book, form submit
+            const protectedSelectors = [
+                '.btn-call',
+                '.btn-book',
+                '.fab-button',
+                'button[type="submit"]',
+                'a[href^="tel:"]',
+                'a[href*="zalo.me"]',
+                'a[href*="facebook.com"]'
+            ];
+
+            protectedSelectors.forEach(selector => {
+                document.querySelectorAll(selector).forEach(element => {
+                    protectElement(element);
+                });
+            });
+
+            console.log('🛡️ Anti-fraud protection activated');
+        });
+
+        // Honeypot: Tạo button ẩn để bắt bot
+        function createHoneypot() {
+            const honeypot = document.createElement('a');
+            honeypot.href = 'tel:0000000000';
+            honeypot.style.cssText = 'position:absolute;left:-9999px;opacity:0;pointer-events:none;';
+            honeypot.id = 'honeypot-link';
+            honeypot.textContent = 'Invisible Link';
+            
+            honeypot.addEventListener('click', function(e) {
+                e.preventDefault();
+                trackSuspiciousActivity('honeypot_clicked');
+                blockUser(72); // Block 3 ngày
+            });
+
+            document.body.appendChild(honeypot);
+        }
+
+        createHoneypot();
+
+        // Export function để có thể gọi từ bên ngoài
+        window.antifraud = {
+            validateClick: validateClick,
+            trackSuspiciousActivity: trackSuspiciousActivity,
+            isBlocked: isBlocked
+        };
+
+    })();
+
+    // ============================================
+    // TÍCH HỢP VỚI GOOGLE ADS
+    // ============================================
+
+    // Override hàm gtag_report_conversion hiện tại
+    const originalGtagConversion = window.gtag_report_conversion;
+    window.gtag_report_conversion = function(url, newTab) {
+        // Kiểm tra click có hợp lệ không
+        if (!window.antifraud.validateClick()) {
+            console.warn('🚫 Conversion blocked - suspicious activity');
+            return false;
+        }
+
+        // Click hợp lệ - gọi hàm gốc
+        console.log('✅ Conversion tracked:', url);
+        if (originalGtagConversion) {
+            return originalGtagConversion(url, newTab);
+        }
+        
+        // Fallback nếu không có hàm gốc
+        if (url) {
+            if (newTab) {
+                window.open(url, '_blank');
+            } else {
+                window.location.href = url;
+            }
+        }
+        return true;
+    };
+
+    </script>
 </body>
 </html>
