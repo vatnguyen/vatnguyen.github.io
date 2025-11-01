@@ -1255,9 +1255,9 @@
         
         // Config
         const CONFIG = {
-            MAX_CLICKS_PER_IP: 3,           // Tối đa 3 click/IP/ngày
-            MAX_CLICKS_PER_SESSION: 5,       // Tối đa 5 click/session
-            MIN_TIME_ON_PAGE: 3000,          // Phải ở trang ít nhất 3 giây
+            MAX_CLICKS_PER_IP: 1,           // Tối đa 1 click/IP/ngày
+            MAX_CLICKS_PER_SESSION: 3,       // Tối đa 3 click/session
+            MIN_TIME_ON_PAGE: 20000,          // Phải ở trang ít nhất 20 giây
             STORAGE_KEY: 'antifraud_data',
             BLOCKED_KEY: 'blocked_until',
             SESSION_KEY: 'session_id'
@@ -1337,7 +1337,7 @@
             localStorage.setItem(CONFIG.BLOCKED_KEY, blockedUntil);
             
             // Hiện cảnh báo
-            alert('⚠️ Hệ thống phát hiện hoạt động bất thường. Vui lòng thử lại sau ' + hours + ' giờ.');
+            // alert('⚠️ Hệ thống phát hiện hoạt động bất thường. Vui lòng thử lại sau ' + hours + ' giờ.');
             
             // Gửi log về server (nếu có)
             trackSuspiciousActivity('user_blocked', { hours: hours });
