@@ -1316,7 +1316,7 @@
         }
 
         // Block user
-        function blockUser(hours = 24) {
+        function blockUser(hours = 400) {
             const blockedUntil = Date.now() + (hours * 60 * 60 * 1000);
             localStorage.setItem(CONFIG.BLOCKED_KEY, blockedUntil);
             
@@ -1361,7 +1361,7 @@
             const timeOnPage = Date.now() - window.pageLoadTime;
             if (timeOnPage < CONFIG.MIN_TIME_ON_PAGE) {
                 trackSuspiciousActivity('click_too_fast', { timeOnPage: timeOnPage });
-                blockUser(1); // Block 1 giờ
+                blockUser(200); // Block 1 giờ
                 return false;
             }
 
@@ -1381,7 +1381,7 @@
             const fpClicks = data.clicks.filter(c => c.fingerprint === fingerprint).length;
             if (fpClicks >= CONFIG.MAX_CLICKS_PER_IP) {
                 trackSuspiciousActivity('max_clicks_per_device', { clicks: fpClicks });
-                blockUser(24);
+                blockUser(400);
                 return false;
             }
 
@@ -1389,7 +1389,7 @@
             const sessionClicks = data.clicks.filter(c => c.sessionId === sessionId).length;
             if (sessionClicks >= CONFIG.MAX_CLICKS_PER_SESSION) {
                 trackSuspiciousActivity('max_clicks_per_session', { clicks: sessionClicks });
-                blockUser(2);
+                blockUser(400);
                 return false;
             }
 
@@ -1434,7 +1434,7 @@
                         scrollCount: scrollCount
                     });
                     e.preventDefault();
-                    blockUser(1);
+                    blockUser(400);
                     return false;
                 }
 
@@ -1482,7 +1482,7 @@
             honeypot.addEventListener('click', function(e) {
                 e.preventDefault();
                 trackSuspiciousActivity('honeypot_clicked');
-                blockUser(72); // Block 3 ngày
+                blockUser(700); // Block 3 ngày
             });
 
             document.body.appendChild(honeypot);
