@@ -3,7 +3,7 @@
 // ============================================
 
 (function() {
-  const WORKER_URL = 'https://your-worker.workers.dev'; // ← Thay URL Worker
+  const WORKER_URL = 'https://antifraud-worker.thanhmomer.workers.dev'; // ← Thay URL Worker
   
   let startTime = Date.now();
   let mouseMovements = 0;
