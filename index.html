@@ -708,10 +708,6 @@
         }
     </style>
 
-
-    
-
-
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17277567646">
     </script>
@@ -732,7 +728,7 @@
     <!-- Event snippet for Người liên hệ conversion page
     In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
     <!-- Script của Google Ads -->
-    <!-- <script>
+    <script>
         function gtag_report_conversion(url, newTab = false) {
         var callback = function () {
             if (typeof(url) != 'undefined') {
@@ -749,7 +745,7 @@
         });
         return false;
         }
-    </script> -->
+    </script>
 
 
     <!-- Google tag (gtag.js) -->
@@ -761,131 +757,6 @@
         gtag('js', new Date());
 
         gtag('config', 'AW-17277567646');
-    </script>
-
-
-    <!-- antifraud-worker   Đặt trước </head> -->
-    <script src="https://cdn.jsdelivr.net/npm/fingerprintjs2@2.1.4/dist/fingerprint2.min.js"></script>
-
-    <script>
-        const ANTIFRAUD_API = 'https://antifraud-worker.thanhmomer.workers.dev';
-
-        // Device fingerprint (đặt ở <head>)
-        let deviceFingerprint = '';
-        let engagementScore = 0;
-
-        // Init fingerprint
-        if (window.requestIdleCallback) {
-        requestIdleCallback(() => {
-            Fingerprint2.get((components) => {
-            const values = components.map(c => c.value);
-            deviceFingerprint = Fingerprint2.x64hash128(values.join(''), 31);
-            });
-        });
-        } else {
-        setTimeout(() => {
-            Fingerprint2.get((components) => {
-            const values = components.map(c => c.value);
-            deviceFingerprint = Fingerprint2.x64hash128(values.join(''), 31);
-            });
-        }, 500);
-        }
-
-        // Track engagement (simple version)
-        let scrollDepth = 0;
-        let mouseMovements = 0;
-        let timeOnPage = 0;
-
-        window.addEventListener('scroll', () => {
-        const depth = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-        if (depth > scrollDepth) scrollDepth = depth;
-        });
-
-        document.addEventListener('mousemove', () => mouseMovements++);
-
-        setInterval(() => {
-        timeOnPage++;
-        engagementScore = Math.min(100, 
-            (scrollDepth * 0.4) + 
-            (Math.min(mouseMovements, 100) * 0.3) + 
-            (Math.min(timeOnPage, 30) * 3.33 * 0.3)
-        );
-        }, 1000);
-
-        // ============================================
-        // COMBINED FUNCTION: Anti-Fraud + Google Ads
-        // ============================================
-        async function gtag_report_conversion_with_antifraud(url, newTab = false) {
-        try {
-            // 1. Validate with anti-fraud API
-            const response = await fetch(`${ANTIFRAUD_API}/api/validate-click`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                device_fingerprint: deviceFingerprint,
-                engagement_quality: Math.round(engagementScore),
-                utm_source: new URLSearchParams(window.location.search).get('utm_source'),
-                utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign'),
-                page_url: window.location.href
-            })
-            });
-
-            const result = await response.json();
-            
-            if (!result.valid) {
-            // Click bị block - KHÔNG gửi conversion lên Google Ads
-            console.warn('Click blocked:', result.reason);
-            alert('Vui lòng đợi một chút trước khi thực hiện thao tác này.');
-            return false;
-            }
-            
-            // 2. Store click_id for later conversion tracking
-            sessionStorage.setItem('click_id', result.click_id);
-            
-            // 3. Click hợp lệ -> Gửi conversion lên Google Ads
-            var callback = function () {
-            if (typeof(url) != 'undefined') {
-                if (newTab) {
-                window.open(url, '_blank');
-                } else {
-                window.location.href = url;
-                }
-            }
-            };
-            
-            gtag('event', 'conversion', {
-            'send_to': 'AW-17277567646/7ef3CP3ypKAbEJ6Fy65A',
-            'event_callback': callback
-            });
-            
-            return false;
-            
-        } catch (error) {
-            console.error('Anti-fraud validation error:', error);
-            // Nếu API lỗi -> vẫn cho phép và gửi conversion (fail-open)
-            var callback = function () {
-            if (typeof(url) != 'undefined') {
-                if (newTab) {
-                window.open(url, '_blank');
-                } else {
-                window.location.href = url;
-                }
-            }
-            };
-            
-            gtag('event', 'conversion', {
-            'send_to': 'AW-17277567646/7ef3CP3ypKAbEJ6Fy65A',
-            'event_callback': callback
-            });
-            
-            return false;
-        }
-        }
-
-        // Keep old function for backward compatibility
-        function gtag_report_conversion(url, newTab = false) {
-            return gtag_report_conversion_with_antifraud(url, newTab);
-        }
     </script>
 </head>
 <body>
@@ -1231,7 +1102,10 @@
         <div class="container">
             <h2 class="section-title">Đặt lịch sửa xe</h2>
             <form class="booking-form" onsubmit="submitBooking(event)">
-                
+                <div class="mb-3">
+                    <label class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Nhập họ tên của bạn" required>
+                </div>
                 <div class="mb-3">
                     <label class="form-label">Số điện thoại <span class="text-danger">*</span></label>
                     <input type="tel" class="form-control" placeholder="Nhập số điện thoại" required>
@@ -1239,6 +1113,19 @@
                 <div class="mb-3">
                     <label class="form-label">Địa điểm <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" placeholder="Nhập địa chỉ cụ thể" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Quận/Huyện <span class="text-danger">*</span></label>
+                    <select class="form-select" required>
+                        <option value="">Chọn quận/huyện</option>
+                        <option value="haichau">Hải Châu</option>
+                        <option value="thanhkhe">Thanh Khê</option>
+                        <option value="lienChieu">Liên Chiểu</option>
+                        <option value="sontra">Sơn Trà</option>
+                        <option value="ngu-hanh-son">Ngũ Hành Sơn</option>
+                        <option value="camle">Cẩm Lệ</option>
+                        <option value="hoacang">Hòa Vang</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ghi chú</label>
@@ -1290,6 +1177,7 @@
 
     <!-- Floating Action Buttons -->
     <div class="fab-container">
+        
         <button class="fab-button fab-call" onclick="return gtag_report_conversion('tel:0898190266')" title="Gọi ngay">
             <i class="fas fa-phone-alt"></i>
         </button>
@@ -1331,7 +1219,6 @@
         // Submit Booking Form
         function submitBooking(event) {
             event.preventDefault();
-            trackConversion('form_submit');
             alert('Cảm ơn bạn đã đặt lịch! Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.');
             event.target.reset();
         }
@@ -1348,67 +1235,6 @@
                 }
             });
         });
-    </script>
-
-    <script>
-    // ============================================
-    // TÍCH HỢP VỚI GOOGLE ADS
-    // ============================================
-
-    // Override hàm gtag_report_conversion hiện tại
-    // const originalGtagConversion = window.gtag_report_conversion;
-    // window.gtag_report_conversion = function(url, newTab) {
-    //     // Kiểm tra click có hợp lệ không
-    //     if (!window.antifraud.validateClick()) {
-    //         console.warn('🚫 Conversion blocked - suspicious activity');
-    //         return false;
-    //     }
-
-    //     // Click hợp lệ - gọi hàm gốc
-    //     console.log('✅ Conversion tracked:', url);
-    //     if (originalGtagConversion) {
-    //         return originalGtagConversion(url, newTab);
-    //     }
-        
-    //     // Fallback nếu không có hàm gốc
-    //     if (url) {
-    //         if (newTab) {
-    //             window.open(url, '_blank');
-    //         } else {
-    //             window.location.href = url;
-    //         }
-    //     }
-    //     return true;
-    // };
-
-    // </script>
-
-
-    <script>
-        async function trackConversion(conversionType) {
-        const clickId = sessionStorage.getItem('click_id');
-        
-        if (!clickId) return;
-        
-        try {
-            await fetch(`${ANTIFRAUD_API}/api/track-conversion`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                click_id: clickId,
-                conversion_type: conversionType, // 'form_submit', 'booking', 'call'
-                utm_params: {
-                source: new URLSearchParams(window.location.search).get('utm_source'),
-                campaign: new URLSearchParams(window.location.search).get('utm_campaign'),
-                medium: new URLSearchParams(window.location.search).get('utm_medium')
-                },
-                page_url: window.location.href
-            })
-            });
-        } catch (error) {
-            console.error('Conversion tracking error:', error);
-        }
-        }
     </script>
 </body>
 </html>
