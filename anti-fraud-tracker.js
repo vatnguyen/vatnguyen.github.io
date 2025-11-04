@@ -111,8 +111,8 @@
     }
   }
   
-  // Send after 3 seconds on page
-  setTimeout(sendTrackingData, 3000);
+  // Send after 0 seconds on page
+  setTimeout(sendTrackingData);
   
   // Send before page unload
   window.addEventListener('beforeunload', () => {
