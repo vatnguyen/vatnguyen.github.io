@@ -953,7 +953,7 @@
     }
         
         /* Floating Action Buttons */
-        .fab-container {
+        /* .fab-container {
             position: fixed;
             bottom: 80px;
             left: 20px;
@@ -988,6 +988,143 @@
         
         .fab-call {
             background: #dc3545;
+        } */
+
+        /* Floating Call Bar */
+        .floating-call-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            animation: pulseFloat 5s infinite;
+        }
+
+        @keyframes pulseFloat {
+            0%, 96% {
+                transform: translateX(-50%) scale(1);
+            }
+            97% {
+                transform: translateX(-50%) scale(1.05);
+            }
+            98% {
+                transform: translateX(-50%) scale(1);
+            }
+            99% {
+                transform: translateX(-50%) scale(1.05);
+            }
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+        }
+
+        .floating-call-button {
+            background: linear-gradient(135deg, #dc3545, #bb2d3b);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 6px 25px rgba(220, 53, 69, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+        }
+
+        .floating-call-button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 30px rgba(220, 53, 69, 0.7);
+        }
+
+        .floating-call-button:active {
+            transform: scale(0.95);
+        }
+
+        .call-icon-wrapper {
+            width: 45px;
+            height: 45px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: ringBell 3s infinite;
+        }
+
+        @keyframes ringBell {
+            0%, 10%, 20% {
+                transform: rotate(0deg);
+            }
+            5% {
+                transform: rotate(-15deg);
+            }
+            15% {
+                transform: rotate(15deg);
+            }
+            25%, 100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .call-icon-wrapper i {
+            font-size: 22px;
+            color: #dc3545;
+        }
+
+        .call-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.3;
+        }
+
+        .call-name {
+            font-size: 16px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .call-subtitle {
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0.95;
+        }
+
+        /* Responsive cho mobile nhỏ */
+        @media (max-width: 400px) {
+            .floating-call-button {
+                padding: 10px 20px;
+                gap: 10px;
+            }
+            
+            .call-icon-wrapper {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .call-icon-wrapper i {
+                font-size: 20px;
+            }
+            
+            .call-name {
+                font-size: 14px;
+            }
+            
+            .call-subtitle {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .call-name {
+                font-size: 13px;
+            }
+            
+            .call-subtitle {
+                font-size: 11px;
+            }
         }
         
         /* Scroll to Top Button */
@@ -1608,10 +1745,24 @@
     </footer>
 
     <!-- Floating Action Buttons -->
-    <div class="fab-container">
+    <!-- <div class="fab-container">
         
         <button class="fab-button fab-call" onclick="return gtag_report_conversion('tel:0898190266')" title="Gọi ngay">
             <i class="fas fa-phone-alt"></i>
+        </button>
+    </div> -->
+
+
+    <!-- Floating Call Button -->
+    <div class="floating-call-bar">
+        <button class="floating-call-button" onclick="return gtag_report_conversion('tel:0898190266')">
+            <div class="call-icon-wrapper">
+                <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="call-text">
+                <span class="call-name">Gọi Thông Nguyễn</span>
+                <span class="call-subtitle">Có mặt 15 phút</span>
+            </div>
         </button>
     </div>
 
