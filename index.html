@@ -265,6 +265,312 @@
                 font-size: 18px;
             }
         }
+
+        /* Mechanic Info Section */
+.mechanic-info-section {
+    padding: 40px 15px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.mechanic-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    border: 3px solid #0d6efd;
+}
+
+.mechanic-avatar {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+}
+
+.mechanic-content {
+    flex: 1;
+}
+
+.mechanic-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.mechanic-header h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.experience-badge {
+    background: #ffc107;
+    color: #000;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.mechanic-specialty {
+    color: #555;
+    font-size: 15px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.mechanic-specialty i {
+    color: #0d6efd;
+    margin-right: 8px;
+}
+
+.mechanic-location {
+    color: #555;
+    font-size: 15px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.mechanic-location i {
+    color: #dc3545;
+    margin-right: 8px;
+}
+
+.mechanic-location strong {
+    color: #333;
+}
+
+.mechanic-contact {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-contact-mechanic {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 200px;
+}
+
+.btn-contact-mechanic:hover {
+    background: #bb2d3b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.btn-zalo-mechanic {
+    background: #0068ff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-zalo-mechanic:hover {
+    background: #0052cc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 104, 255, 0.3);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .mechanic-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+    
+    .mechanic-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 35px;
+    }
+    
+    .mechanic-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .mechanic-header h3 {
+        font-size: 20px;
+    }
+    
+    .mechanic-contact {
+        flex-direction: column;
+    }
+    
+    .btn-contact-mechanic,
+    .btn-zalo-mechanic {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+        /* Pricing Section */
+.pricing-section {
+    padding: 40px 15px;
+    background: #f8f9fa;
+}
+
+.pricing-table-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.pricing-table thead {
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    color: white;
+}
+
+.pricing-table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.pricing-table th:last-child {
+    text-align: right;
+}
+
+.pricing-table tbody tr {
+    border-bottom: 1px solid #e9ecef;
+    transition: background 0.2s ease;
+}
+
+.pricing-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.pricing-table tbody tr.highlight-row {
+    background: #fff3cd;
+}
+
+.pricing-table tbody tr.highlight-row:hover {
+    background: #ffe69c;
+}
+
+.pricing-table td {
+    padding: 15px;
+    font-size: 15px;
+}
+
+.pricing-table td i {
+    color: #0d6efd;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.pricing-table td.price {
+    text-align: right;
+    font-weight: 700;
+    color: #dc3545;
+    font-size: 18px;
+}
+
+.pricing-note {
+    background: #d1ecf1;
+    border-left: 4px solid #0d6efd;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.pricing-note i {
+    color: #0d6efd;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.pricing-note p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.btn-call-pricing {
+    width: 100%;
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-call-pricing:hover {
+    background: #bb2d3b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+@media (max-width: 576px) {
+    .pricing-table th,
+    .pricing-table td {
+        padding: 12px 10px;
+        font-size: 14px;
+    }
+    
+    .pricing-table td.price {
+        font-size: 16px;
+    }
+    
+    .pricing-note {
+        padding: 12px;
+    }
+    
+    .pricing-note p {
+        font-size: 13px;
+    }
+}
         
         /* Social Media Cards */
         .social-cards {
@@ -589,6 +895,62 @@
             color: #adb5bd;
             font-size: 14px;
         }
+
+
+        /* Trust Badges Section */
+    .trust-badges-section {
+        padding: 40px 15px;
+        background: white;
+    }
+
+    .trust-badge {
+        text-align: center;
+        padding: 20px 10px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .trust-badge:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .trust-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 15px;
+        background: linear-gradient(135deg, #0d6efd, #0a58ca);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: white;
+    }
+
+    .trust-badge h5 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .trust-badge p {
+        font-size: 13px;
+        color: #666;
+        margin: 0;
+    }
+
+    @media (min-width: 768px) {
+        .trust-badge h5 {
+            font-size: 17px;
+        }
+        
+        .trust-badge p {
+            font-size: 14px;
+        }
+    }
         
         /* Floating Action Buttons */
         .fab-container {
@@ -809,6 +1171,8 @@
         </div>
     </header>
 
+
+
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1500">
@@ -910,38 +1274,138 @@
         </div>
     </section>
 
-   
+    <!-- Trust Badges Section -->
+    <section class="trust-badges-section">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-6 col-md-3">
+                    <div class="trust-badge">
+                        <div class="trust-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h5>Có mặt 15 phút</h5>
+                        <p>Phản hồi nhanh chóng</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="trust-badge">
+                        <div class="trust-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <h5>Không phát sinh</h5>
+                        <p>Minh bạch chi phí</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="trust-badge">
+                        <div class="trust-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <h5>Báo giá trước</h5>
+                        <p>Khách đồng ý mới làm</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="trust-badge">
+                        <div class="trust-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h5>Phụ tùng chính hãng</h5>
+                        <p>Đảm bảo chất lượng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     
 
-    <!-- Services Carousel -->
-    <section class="services-section" id="services">
+    <!-- Pricing Table Section -->
+    <section class="pricing-section" id="services">
         <div class="container">
-            <h2 class="section-title">Dịch vụ nổi bật</h2>
-            <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="service-card">
-                            <div class="service-image">
+            <h2 class="section-title">Bảng giá - Công khai minh bạch</h2>
+            <div class="pricing-table-wrapper">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Dịch vụ</th>
+                            <th>Giá từ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
                                 <i class="fas fa-tools"></i>
-                            </div>
-                            <div class="service-content">
-                                <h4>Sửa chữa tận nơi 24/7</h4>
-                                <p>Xe hư giữa đường? Gọi ngay! Chúng tôi có mặt trong 15 phút với đầy đủ dụng cụ và phụ tùng chính hãng.</p>
-                                <ol>
-                                    <li>Vá xe từ ---- <strong>49 K</strong></li>
-                                    <li>Thay ruột từ ---- <strong>129 K</strong></li>
-                                    <li>Kích bình từ ---- <strong>69 K</strong></li>
-                                    <li>Bạn muốn thay gì chúng tôi <br><strong>MUA HỘ</strong> chỉ tính công ---- <strong>89 K</strong></li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
+                                <span>Vá xe tận nơi</span>
+                            </td>
+                            <td class="price">49K</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fas fa-circle"></i>
+                                <span>Thay ruột</span>
+                            </td>
+                            <td class="price">129K</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fas fa-car-battery"></i>
+                                <span>Kích bình</span>
+                            </td>
+                            <td class="price">69K</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td>
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Mua hộ phụ tùng</span>
+                            </td>
+                            <td class="price">+89K công</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="pricing-note">
+                    <i class="fas fa-check-circle"></i>
+                    <p><strong>Giá đã bao gồm di chuyển trong nội thành</strong> – Không phụ thu ban đêm</p>
+                </div>
+                
+                <button class="btn-call-pricing" onclick="return gtag_report_conversion('tel:0898190266')">
+                    <i class="fas fa-phone-alt"></i> Gọi ngay để được tư vấn chi tiết
+                </button>
             </div>
         </div>
     </section>
 
 
+    <!-- Mechanic Info Section -->
+    <section class="mechanic-info-section">
+        <div class="container">
+            <div class="mechanic-card">
+                <div class="mechanic-avatar">
+                    <i class="fas fa-user-cog"></i>
+                </div>
+                <div class="mechanic-content">
+                    <div class="mechanic-header">
+                        <h3>👨‍🔧 Thợ: Nguyễn Hữu Thông</h3>
+                        <span class="experience-badge">7 năm kinh nghiệm</span>
+                    </div>
+                    <p class="mechanic-specialty">
+                        <i class="fas fa-wrench"></i>
+                        Chuyên sửa chữa xe máy: Honda, Yamaha, Vision, SH, Lead, Winner, Exciter...
+                    </p>
+                    <p class="mechanic-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <strong>Khu vực phục vụ:</strong> Hải Châu, Thanh Khê, Liên Chiểu, Sơn Trà, Ngũ Hành Sơn, Cẩm Lệ
+                    </p>
+                    <div class="mechanic-contact">
+                        <button class="btn-contact-mechanic" onclick="return gtag_report_conversion('tel:0898190266')">
+                            <i class="fas fa-phone-alt"></i> Liên hệ ngay: 0898 190 266
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
      <!-- Social Media Cards -->
     <section class="social-cards">
@@ -1102,6 +1566,9 @@
             </div>
         </div>
     </section>
+
+
+    
 
     <!-- Footer -->
     <footer class="footer">
