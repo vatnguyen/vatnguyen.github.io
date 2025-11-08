@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /css/
+Disallow: /font/
+Disallow: /js/
+Disallow: /webfonts/
+
+Sitemap: https://suaxeluudongthongnguyen.momer.my/sitemap.xml
