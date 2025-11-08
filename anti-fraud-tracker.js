@@ -112,16 +112,16 @@
   }
   
   // Send after 0 seconds on page
-  setTimeout(sendTrackingData);
+  // setTimeout(sendTrackingData);
   
-  // Send before page unload
-  window.addEventListener('beforeunload', () => {
-    navigator.sendBeacon(`${WORKER_URL}/api/log-access`, JSON.stringify({
-      device_fingerprint: generateFingerprint(),
-      engagement_quality: getEngagementQuality(),
-      page_url: window.location.href,
-      timestamp: Date.now()
-    }));
-  });
+  // // Send before page unload
+  // window.addEventListener('beforeunload', () => {
+  //   navigator.sendBeacon(`${WORKER_URL}/api/log-access`, JSON.stringify({
+  //     device_fingerprint: generateFingerprint(),
+  //     engagement_quality: getEngagementQuality(),
+  //     page_url: window.location.href,
+  //     timestamp: Date.now()
+  //   }));
+  // });
   
 })();
