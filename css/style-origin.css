@@ -1190,3 +1190,10 @@
         .breadcrumb-item.active {
             color: #6c757d;
         }
+
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
